@@ -23,6 +23,7 @@ func main() {
 	color.ColorPrintln(color.Green, hash.MD5Hash_StringArray([]string{}))
 	color.ColorPrintln(color.Green, hash.MD5Hash_String(""))
 	color.ColorPrintln(color.Green, path.GetAbsPath("/subfolder/subsubfolder"))
+	color.ColorPrintln(color.Green, path.GetAbsPath("/subfolder/xxx.json"))
 	path.ExEPathPrintln()
 
 	bytesnum, err := bytes.Parse("11.47TB") //case insensitive
