@@ -3,8 +3,7 @@
 
 
 ```go
-
-package main
+ package main
 
 import (
 	"github.com/daqnext/utils/bytes"
