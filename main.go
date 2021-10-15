@@ -1,9 +1,3 @@
-# utils
-### common tools for golang 
-
-
-```go
-
 package main
 
 import (
@@ -33,7 +27,3 @@ func main() {
 		color.ColorPrintln(color.Green, bytesnum)
 	}
 }
-
-
-```
-
