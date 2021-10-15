@@ -1,4 +1,4 @@
-package ip
+package ip_util
 
 import (
 	"encoding/json"

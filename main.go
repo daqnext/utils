@@ -1,43 +1,43 @@
 package main
 
 import (
-	"github.com/daqnext/utils/bytes"
-	"github.com/daqnext/utils/color"
-	"github.com/daqnext/utils/hash"
-	"github.com/daqnext/utils/ip"
-	"github.com/daqnext/utils/path"
-	"github.com/daqnext/utils/rand"
-	"github.com/daqnext/utils/runtime"
-	"github.com/daqnext/utils/time"
+	"github.com/daqnext/utils/bytes_util"
+	"github.com/daqnext/utils/color_util"
+	"github.com/daqnext/utils/hash_util"
+	"github.com/daqnext/utils/ip_util"
+	"github.com/daqnext/utils/path_util"
+	"github.com/daqnext/utils/rand_util"
+	"github.com/daqnext/utils/runtime_util"
+	"github.com/daqnext/utils/time_util"
 )
 
 func main() {
 
-	color.ColorPrintln(color.Yellow, time.GetUTCDate())
-	color.ColorPrintln(color.Yellow, time.GetUTCDateTime())
-	color.ColorPrintln(color.Red, bytes.Format(12312341344))
-	color.ColorPrintln(color.Green, rand.GenRandStr(80))
-	color.ColorPrintln(color.Red, runtime.StackString(100))
-	color.ColorPrintln(color.Green, hash.MD5Hash_String("1234214"))
-	color.ColorPrintln(color.Green, hash.MD5Hash_StringArray([]string{"123", "1234"}))
-	color.ColorPrintln(color.Green, hash.MD5Hash_StringArray([]string{}))
-	color.ColorPrintln(color.Green, hash.MD5Hash_String(""))
-	color.ColorPrintln(color.Green, path.GetAbsPath("/subfolder/subsubfolder"))
-	color.ColorPrintln(color.Green, path.GetAbsPath("/subfolder/xxx.json"))
-	path.ExEPathPrintln()
+	color_util.ColorPrintln(color_util.Yellow, time_util.GetUTCDate())
+	color_util.ColorPrintln(color_util.Yellow, time_util.GetUTCDateTime())
+	color_util.ColorPrintln(color_util.Red, bytes_util.Format(12312341344))
+	color_util.ColorPrintln(color_util.Green, rand_util.GenRandStr(80))
+	color_util.ColorPrintln(color_util.Red, runtime_util.StackString(100))
+	color_util.ColorPrintln(color_util.Green, hash_util.MD5Hash_String("1234214"))
+	color_util.ColorPrintln(color_util.Green, hash_util.MD5Hash_StringArray([]string{"123", "1234"}))
+	color_util.ColorPrintln(color_util.Green, hash_util.MD5Hash_StringArray([]string{}))
+	color_util.ColorPrintln(color_util.Green, hash_util.MD5Hash_String(""))
+	color_util.ColorPrintln(color_util.Green, path_util.GetAbsPath("/subfolder/subsubfolder"))
+	color_util.ColorPrintln(color_util.Green, path_util.GetAbsPath("/subfolder/xxx.json"))
+	path_util.ExEPathPrintln()
 
-	bytesnum, err := bytes.Parse("11.47TB") //case insensitive
+	bytesnum, err := bytes_util.Parse("11.47TB") //case insensitive
 	if err != nil {
-		color.ColorPrintln(color.Red, err.Error())
+		color_util.ColorPrintln(color_util.Red, err.Error())
 	} else {
-		color.ColorPrintln(color.Green, bytesnum)
+		color_util.ColorPrintln(color_util.Green, bytesnum)
 	}
 
-	ipstr, iperr := ip.GetPubIp(false)
+	ipstr, iperr := ip_util.GetPubIp(false)
 	if iperr != nil {
-		color.ColorPrintln(color.Red, iperr)
+		color_util.ColorPrintln(color_util.Red, iperr)
 	} else {
-		color.ColorPrintln(color.Blue, ipstr)
+		color_util.ColorPrintln(color_util.Blue, ipstr)
 	}
 
 }

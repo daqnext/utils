@@ -1,4 +1,4 @@
-package runtime
+package runtime_util
 
 import "runtime"
 

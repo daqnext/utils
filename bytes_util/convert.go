@@ -1,4 +1,4 @@
-package bytes
+package bytes_util
 
 import (
 	"fmt"
