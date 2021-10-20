@@ -3,6 +3,7 @@ package cluster
 import (
 	"context"
 	"math/rand"
+	"time"
 
 	gofastcache "github.com/daqnext/go-fast-cache"
 	"github.com/daqnext/utils/cache_util"
@@ -40,4 +41,10 @@ func SmartCheck_LocalCache_Redis(ctx context.Context, Redis *redis.ClusterClient
 		}
 	}
 	return nil, 0, false
+}
+
+func SmartSet_LocalCache_Redis(ctx context.Context, Redis *redis.ClusterClient, LocalCache *gofastcache.LocalCache, keystr string, value interface{}, ttlSecond int64) {
+	LocalCache.Set(keystr, value, ttlSecond)
+	strsrc := LocalCache.SetRand(keystr, ttlSecond+10)
+	Redis.Set(ctx, keystr, strsrc, time.Duration(ttlSecond+30)*time.Second)
 }
