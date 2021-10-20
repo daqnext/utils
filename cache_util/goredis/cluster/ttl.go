@@ -35,8 +35,9 @@ func CheckTtlRefresh(Redis *redis.ClusterClient, ctx context.Context, keystr str
 func SmartCheck_LocalCache_Redis(ctx context.Context, Redis *redis.ClusterClient, LocalCache *gofastcache.LocalCache, keystr string) (interface{}, int64, bool) {
 	localvalue, ttl, localexist := LocalCache.Get(keystr)
 	if !cache_util.CheckTtlRefresh(ttl) && localexist {
-		rresult, err := Redis.Get(ctx, keystr).Result()
-		if err == nil && rresult == LocalCache.GetRand(keystr) {
+		randSyncStr := keystr + ":randsync"
+		rresult, err := Redis.Get(ctx, randSyncStr).Result()
+		if err == nil && rresult == LocalCache.GetRand(randSyncStr) {
 			return localvalue, ttl, true
 		}
 	}
@@ -45,6 +46,7 @@ func SmartCheck_LocalCache_Redis(ctx context.Context, Redis *redis.ClusterClient
 
 func SmartSet_LocalCache_Redis(ctx context.Context, Redis *redis.ClusterClient, LocalCache *gofastcache.LocalCache, keystr string, value interface{}, ttlSecond int64) {
 	LocalCache.Set(keystr, value, ttlSecond)
-	strsrc := LocalCache.SetRand(keystr, ttlSecond+10)
-	Redis.Set(ctx, keystr, strsrc, time.Duration(ttlSecond+30)*time.Second)
+	randSyncStr := keystr + ":randsync"
+	strsrc := LocalCache.SetRand(randSyncStr, ttlSecond+10)
+	Redis.Set(ctx, randSyncStr, strsrc, time.Duration(ttlSecond+30)*time.Second)
 }
