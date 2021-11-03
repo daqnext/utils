@@ -50,3 +50,11 @@ func SmartSet_LocalCache_Redis(ctx context.Context, Redis *redis.ClusterClient, 
 	strsrc := LocalCache.SetRand(randSyncStr, ttlSecond+10)
 	Redis.Set(ctx, randSyncStr, strsrc, time.Duration(ttlSecond+30)*time.Second)
 }
+
+func SmartDel_LocalCache_Redis(ctx context.Context, Redis *redis.ClusterClient, LocalCache *gofastcache.LocalCache, keystr string) {
+	randSyncStr := keystr + ":randsync"
+	LocalCache.Delete(keystr)
+	LocalCache.Delete(randSyncStr)
+	Redis.Del(ctx, keystr)
+	Redis.Del(ctx, randSyncStr)
+}
